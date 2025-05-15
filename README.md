@@ -1,7 +1,6 @@
 # pawdb
 Utility package to access the miriad of dbs we need to access from our pipelines. (Miau & Ráció)
 
-
 # Development
 You should have poetry installed on your system: 
 When cloning the first time:
@@ -15,6 +14,8 @@ When cloning the first time:
 
 
 #### Interface
-- connection
+- connect & close
 - read query -> pandas
 - write
+
+
