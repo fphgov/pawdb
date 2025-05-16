@@ -24,7 +24,7 @@ class BaseConnector(ABC):
         pass
 
     @abstractmethod
-    def fetch_query(self, query: str, params: dict = None) -> list:
+    def fetch_query(self, query: str, params: dict = None) -> list[tuple]:
         """Fetch results from a query."""
         pass
 
