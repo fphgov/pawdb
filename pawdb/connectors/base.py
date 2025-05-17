@@ -24,12 +24,12 @@ class BaseConnector(ABC):
         pass
 
     @abstractmethod
-    def fetch_query(self, query: str, params: dict = None) -> list[tuple]:
+    def fetch_query_to_list(self, query: str, params: dict = None) -> list[tuple]:
         """Fetch results from a query."""
         pass
 
     @abstractmethod
-    def read_query(self, query: str, params: dict = None) -> pd.DataFrame:
+    def fetch_query_to_pandas(self, query: str, params: dict = None) -> pd.DataFrame:
         """Read a query and return the results as a DataFrame."""
         pass
 
