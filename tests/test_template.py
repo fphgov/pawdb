@@ -1,4 +1,4 @@
-"""this modules tests the precommit hook"""
+"""this is a test placeholder file. make one per module!"""
 
 
 def test_precommit():

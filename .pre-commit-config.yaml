@@ -4,9 +4,11 @@ repos:
     hooks:
       - id: ruff
         args: [--fix]
+        name: ruff-autolint
         types: [python]
         stages: [pre-commit]
       - id: ruff-format
+        name: ruff-autoformat
         types: [python]
         stages: [pre-commit]
 
@@ -32,22 +34,23 @@ repos:
   - repo: local
     hooks:
       - id: no-todo
-        name: Disallow TODO
+        name: disallow TODO
         entry: TODO
         language: pygrep
         types: [python]
 
       - id: no-print-statements
-        name: Disallow print() statements
+        name: disallow print() statements
         entry: print\(
         language: pygrep
         types: [python]
 
-      - id: run-tests
-        name: Run Unit Tests
-        entry: pytest
+      - id: run-tests-and-coverage
+        name: run tests and show test coverage
+        entry: bash -c "python -m pytest --cov=pawdb tests/ --cov-report=term-missing"
         language: system
         pass_filenames: false
         always_run: true
         # args: ['--disable-warnings']
+        verbose: true
         stages: [pre-commit]
