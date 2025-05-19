@@ -22,6 +22,12 @@ repos:
       - id: check-added-large-files
       - id: check-yaml
       - id: debug-statements
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        args: [--select=D1]  # Only enforce presence of docstrings
         
   - repo: local
     hooks:
