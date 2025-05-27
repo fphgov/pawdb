@@ -1,5 +1,6 @@
-import platform
-import pyodbc
+"""SQLite Connector module for development and testing."""
+
+import sqlite3
 import pandas as pd
 from .base import BaseConnector
 from .decorators import log_execution_time
@@ -7,31 +8,19 @@ from .decorators import log_execution_time
 from . import logger
 
 
-class ODBCConnector(BaseConnector):
-    """ODBC Connector for MS SQL Server."""
+class SQLiteConnector(BaseConnector):
+    """SQLite Connector for development and testing."""
 
     def connect(self):
-        """Establishes an ODBC connection using configuration parameters."""
-        conn_str = (
-            f"DRIVER={{{self.config.get('DRIVER', 'ODBC Driver 17 for SQL Server')}}};"
-            f"SERVER={self.config['SERVER']};"
-            f"DATABASE={self.config['DATABASE']};"
-        )
-        if platform.system() == "Windows" and self.config.get(
-            "TRUSTED_CONNECTION", False
-        ):
-            conn_str += "Trusted_Connection=yes;"
-        else:
-            conn_str += f"UID={self.config['UID']};PWD={self.config['PWD']};"
-        conn_str += "TrustServerCertificate=yes;"
-
-        self.connection = pyodbc.connect(conn_str)
+        """Establishes a connection to the SQLite database."""
+        db_path = self.config.get("DATABASE", ":memory:")  # Default to in-memory DB
+        self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
         logger.info(
-            "Connected to database.",
+            "Connected to SQLite database.",
             extra={
                 "method": f"{self.__module__}.{self.__class__.__name__}.connect",
-                "database": self.config["DATABASE"],
+                "database": db_path,
             },
         )
 
@@ -42,7 +31,7 @@ class ODBCConnector(BaseConnector):
         if self.connection:
             self.connection.close()
         logger.info(
-            "Database connection closed.",
+            "SQLite database connection closed.",
             extra={"method": f"{self.__module__}.{self.__class__.__name__}.close"},
         )
 
@@ -78,8 +67,5 @@ class ODBCConnector(BaseConnector):
         if not self.connection:
             self.connect()
 
-        if params:
-            df = pd.read_sql(query, self.connection, params=params)
-        else:
-            df = pd.read_sql(query, self.connection)
+        df = pd.read_sql(query, self.connection, params=params)
         return {"log_context": {"query": query, "rows_fetched": len(df)}, "data": df}
