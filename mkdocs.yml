@@ -1,0 +1,19 @@
+site_name: Pawdb Documentation
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          docstring_style: google  # Or "numpy" or "restructured"
+          show_root_full_docstring: true
+          show_source: true
+          show_signature: true
+- search
+
+
+nav:
+- Home: index.md
+- configs: configs.md
+
+theme: readthedocs

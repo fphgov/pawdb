@@ -11,6 +11,8 @@ pyodbc = "^5.2.0"
 pandas = "^2.2.3"
 dotenv = "^0.9.9"
 python-json-logger = "^3.3.0"
+mkdocs = "^1.6.1"
+mkdocstrings-python = "^1.16.12"
 
 
 [tool.poetry.group.dev.dependencies]
