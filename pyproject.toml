@@ -12,8 +12,6 @@ pyodbc = "5.0.1"
 pandas = "2.1.2"
 dotenv = "^0.9.9"
 python-json-logger = "^3.3.0"
-mkdocs = "^1.6.1"
-mkdocstrings-python = "^1.16.12"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -21,6 +19,8 @@ black = "^25.1.0"
 pre-commit = "^4.2.0"
 pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
+mkdocs = "^1.6.1"
+mkdocstrings-python = "^1.16.12"
 
 [build-system]
 requires = ["poetry-core"]
