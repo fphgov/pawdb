@@ -54,7 +54,10 @@ class ODBCConnector(BaseConnector):
         if not self.connection:
             self.connect()
 
-        self.cursor.execute(query, params or {})
+        if params:
+            self.cursor.execute(query, params)
+        else:
+            self.cursor.execute(query)
         self.connection.commit()
         return {"log_context": {"query": query, "rows_affected": self.cursor.rowcount}}
 
