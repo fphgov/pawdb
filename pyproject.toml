@@ -1,27 +1,27 @@
-[tool.poetry]
+[project]
 name = "pawdb"
 version = "0.1.0"
-description = "Utility package to access the miriad of dbs we need to access from our pipelines. (Miau &amp; Ráció)"
-authors = ["partvishegy <venczeli.jozsef@budapest.hu>"]
+description = "Utility package to access the miriad of dbs we need to access from our pipelines. (Miau & Ráció)"
+authors = [{name = "partvishegy", email = "venczeli.jozsef@budapest.hu"}]
 readme = "README.md"
-packages = [{include = "pawdb", from = "./"}]
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "pyodbc>=5.0.1",
+    "pandas>=2.1.2",
+    "dotenv>=0.9.9",
+    "python-json-logger>=3.3.0",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.10,<3.11"
-pyodbc = "5.0.1"
-pandas = "2.1.2"
-dotenv = "^0.9.9"
-python-json-logger = "^3.3.0"
-
-
-[tool.poetry.group.dev.dependencies]
-black = "^25.1.0"
-pre-commit = "^4.2.0"
-pytest = "^8.3.5"
-pytest-cov = "^6.1.1"
-mkdocs = "^1.6.1"
-mkdocstrings-python = "^1.16.12"
+[project.optional-dependencies]
+dev = [
+    "black>=25.1.0",
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "mkdocs>=1.6.1",
+    "mkdocstrings-python>=1.16.12",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
