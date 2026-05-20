@@ -9,7 +9,7 @@ packages = [{include = "pawdb", from = "./"}]
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
 pyodbc = "5.0.1"
-pandas = "2.1.2"
+pandas = ">=2.1.2"
 dotenv = "^0.9.9"
 python-json-logger = "^3.3.0"
 
